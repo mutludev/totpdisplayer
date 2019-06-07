@@ -1,4 +1,4 @@
-import pyotp, datetime, time, os
+import pyotp, datetime, os
 from terminaltables import AsciiTable
 
 def print_keys():
@@ -6,7 +6,7 @@ def print_keys():
     table_data = [["Name","Key"]]
     global longest
     longest = 0
-    with open("otp_keys.txt","r") as f:
+    with open("secrets.txt","r") as f:
         for data in f.readlines():
             data = data.replace("\n","")
             name,secret = data.split(":")
