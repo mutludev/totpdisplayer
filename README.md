@@ -19,7 +19,7 @@ pip install pyotp
 First clone the repository
 
 ```
-git clone https://github.com/5h3ll0/totpreader.git
+git clone https://github.com/5h3ll0/totpdisplayer.git
 ```
 
 Next create secrets.txt file in same directory and edit like below,
