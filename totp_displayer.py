@@ -1,4 +1,4 @@
-import pyotp, datetime, os
+import pyotp, datetime, os, time
 from terminaltables import AsciiTable
 
 def print_keys():
