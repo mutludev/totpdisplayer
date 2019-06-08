@@ -30,8 +30,12 @@ def main():
                 remaining_time = 30-time_sec
             else:
                 remaining_time = 60-time_sec
-            table_len = longest+13
-            print("#"*(table_len-((remaining_time*table_len)//30)), end="\r")
+            if remaining_time < 10:
+                remaining_time_str = "0{}".format(remaining_time)
+            else:
+                remaining_time_str = str(remaining_time)
+            table_len = longest+11
+            print(remaining_time_str + "#"*(table_len-((remaining_time*table_len)//30)), end="\r")
 
 
 
