@@ -10,8 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 ```
-pip install terminaltables
-pip install pyotp
+pip install -r requirements.txt
 ```
 
 ### Installing
