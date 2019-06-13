@@ -17,7 +17,6 @@ pip install -r requirements.txt
 ```
 
 Next create secrets.txt file in same directory and edit like below,
-project contains example secrets.txt file
 
 ```
 Name#1:JBSWY3DPEHPK3PXP
