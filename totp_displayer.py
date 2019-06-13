@@ -21,7 +21,6 @@ def print_table(data, longest_lenght):
 
 def print_keys():
     os.system('cls' if os.name == 'nt' else 'clear')
-    global longest
     longest = 0
     table_data = list()
     with open("secrets.txt", "r") as f:
@@ -33,13 +32,15 @@ def print_keys():
             secret = pyotp.TOTP(secret).now()
             table_data.append([name, secret])
         longest = print_table(table_data, longest)
+        return longest
 
 
 def main():
+    longest_name = print_keys()
     while True:
         time_sec = datetime.datetime.now().second
         if(time_sec == 00 or time_sec == 30):
-            print_keys()
+            longest_name = print_keys()
             time.sleep(1)
         else:
             if time_sec <= 30:
@@ -50,11 +51,10 @@ def main():
                 remaining_time_str = "0{}".format(remaining_time)
             else:
                 remaining_time_str = str(remaining_time)
-            table_len = longest+11
+            table_len = longest_name+11
             loading = "#"*(table_len-((remaining_time*table_len)//30))
             print(remaining_time_str + loading, end="\r")
 
 
 if __name__ == "__main__":
-    print_keys()
     main()
