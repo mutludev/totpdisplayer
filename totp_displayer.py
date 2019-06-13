@@ -2,14 +2,28 @@ import pyotp
 import datetime
 import os
 import time
-from terminaltables import AsciiTable
+
+
+def print_table(data, longest_lenght):
+    if longest_lenght < 4:
+        longest_lenght = 4
+    print("+-{}-+--------+".format(longest_lenght*"-"))
+    print("| Name{} | Key    |".format((longest_lenght-4)*" "))
+    print("+-{}-+--------+".format(longest_lenght*"-"))
+
+    for creds in data:
+        blank_space = str(" "*(longest_lenght-len(creds[0])))
+        print("| {} | {} |".format(creds[0]+blank_space, creds[1]))
+
+    print("+-{}-+--------+".format(longest_lenght*"-"))
+    return longest_lenght
 
 
 def print_keys():
     os.system('cls' if os.name == 'nt' else 'clear')
-    table_data = [["Name", "Key"]]
     global longest
     longest = 0
+    table_data = list()
     with open("secrets.txt", "r") as f:
         for data in f.readlines():
             data = data.replace("\n", "")
@@ -18,8 +32,7 @@ def print_keys():
                 longest = len(name)
             secret = pyotp.TOTP(secret).now()
             table_data.append([name, secret])
-    table = AsciiTable(table_data)
-    print(table.table)
+        longest = print_table(table_data, longest)
 
 
 def main():

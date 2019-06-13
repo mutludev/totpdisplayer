@@ -1,2 +1,1 @@
 pytotp==3
-terminaltables==3.1.0
