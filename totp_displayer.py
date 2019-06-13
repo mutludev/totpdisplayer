@@ -4,7 +4,6 @@ from terminaltables import AsciiTable
 def print_keys():
     os.system('cls' if os.name == 'nt' else 'clear')
     table_data = [["Name","Key"]]
-    global longest
     longest = 0
     with open("secrets.txt","r") as f:
         for data in f.readlines():
@@ -16,14 +15,14 @@ def print_keys():
             table_data.append([name,secret])
     table = AsciiTable(table_data)
     print(table.table)
-
+    return longest
 
 
 def main():
     while True:
         time_sec = datetime.datetime.now().second
         if(time_sec == 00 or time_sec == 30):
-            print_keys()
+            longest_name = print_keys()
             time.sleep(1)
         else:
             if time_sec <=30:
@@ -34,7 +33,7 @@ def main():
                 remaining_time_str = "0{}".format(remaining_time)
             else:
                 remaining_time_str = str(remaining_time)
-            table_len = longest+11
+            table_len = longest_name+11
             print(remaining_time_str + "#"*(table_len-((remaining_time*table_len)//30)), end="\r")
 
 
