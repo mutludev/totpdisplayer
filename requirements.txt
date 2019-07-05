@@ -1,1 +1,1 @@
-pytotp==3
+pyotp==2.2.7
