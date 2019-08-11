@@ -1,7 +1,11 @@
-import pyotp
 import datetime
 import os
 import time
+import base64
+import hmac
+import struct
+import sys
+
 
 
 def print_table(data, longest_lenght):
@@ -29,11 +33,19 @@ def print_keys():
             name, secret = data.split(":")
             if len(name) > longest:
                 longest = len(name)
-            secret = pyotp.TOTP(secret).now()
+            secret = hotp(secret)
             table_data.append([name, secret])
         longest = print_table(table_data, longest)
         return longest
 
+def hotp(secret):
+    padding = '=' * ((8 - len(secret)) % 8)
+    secret_bytes = base64.b32decode(secret.upper() + padding)
+    counter_bytes = struct.pack(">Q", int(time.time() / 30))
+    mac = hmac.digest(secret_bytes, counter_bytes, "sha1")
+    offset = mac[-1] & 0x0f
+    truncated = struct.unpack('>L', mac[offset:offset+4])[0] & 0x7fffffff
+    return str(truncated)[-6:].rjust(6, '0')
 
 def main():
     longest_name = print_keys()
