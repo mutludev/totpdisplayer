@@ -8,12 +8,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-First clone the repository and install requirements
+First clone the repository
 
 ```
 git clone https://github.com/5h3ll0/totpdisplayer.git
-
-pip install -r requirements.txt
 ```
 
 Next create secrets.txt file in same directory and edit like below,
